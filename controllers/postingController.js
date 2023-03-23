@@ -97,7 +97,8 @@ const confirmPost = async (req, res) => {
     const updatePost = await posting.save();
 
     const statusMail = "confirm";
-    await sendEmail(statusMail, posting);
+    const link = "";
+    await sendEmail(statusMail, posting, link);
     sendNotification();
 
     res.status(200).json({

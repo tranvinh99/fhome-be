@@ -5,11 +5,13 @@ require("dotenv").config();
 // Hàm gửi thông báo push đến một thiết bị cụ thể
 const sendNotification = async () => {
   const serverKey = process.env.SERVER_KEY; // Server key from Firebase console
-  const deviceToken =
-    "eiu1k7EfSIyTdBKl2q7ly3:APA91bE8PSetGf1Bu-F53KZkIgtnrKLGprFhXzLmVMlpHO25jigofisXzvEk121yBX7tjPBJXNGb7JVHr3yw7rYz-wZBJM0-0y3U93HrF4rGwTLtKihYfx93ZdTjRxoLVBWT7-4GyJbH";
+  const deviceToken = [
+    "foU5AHmpSN-igDQ4x-OTir:APA91bHtxPqx68yEueeQNCQ9kDhMSHzHSXNhUIe9_i4MP1E_W25UJs8slEecYCwKZKNfiTrIJ2-t16tINdEDL2Zfeq8gUtt5quDvdtwZjnTQRlGNDAPBYOJ854nYYket4NZJpGfTRd0O",
+    "etoTKnBRRQuwEsZx03QvQb:APA91bFUYlykpRbroS-Hsr9IMdqTd2lV186obeNgiqwCwXMn9ECAgLELW_RkbmuC6K8Vu6ep5tmmRyMwUyrbS2S77jPtn5_7bhlJToO0mHdSX556fz2FwQ254QE04VTQ92Oi3a1Q8tqr",
+  ];
 
   const datapayload = {
-    to: deviceToken,
+    registration_ids: deviceToken,
     notification: {
       title: "New notification in your app",
       body: "Someone is waiting for your approval!",

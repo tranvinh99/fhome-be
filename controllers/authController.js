@@ -11,7 +11,6 @@ const adminEmails = [
   "taivtse151030@fpt.edu.vn",
   "vinhthse151179@fpt.edu.vn",
   "thinhddse151086@fpt.edu.vn",
-  "tuanndse151153@fpt.edu.vn",
 ];
 
 const createAccessToken = (payload) => {
@@ -40,7 +39,7 @@ const login = async (req, res) => {
       });
       return;
     }
-    
+
     const userLogin = await User.findOne({
       email: googlePayload.email,
       status: true,
@@ -120,8 +119,9 @@ const login = async (req, res) => {
 
         await User.create(newUser);
 
-        const statusMail = "register"
-        await sendEmail(statusMail, newUser);
+        const statusMail = "register";
+        const link = "";
+        await sendEmail(statusMail, newUser, link);
         res.status(400).json({
           status: "Fail",
           messages:
