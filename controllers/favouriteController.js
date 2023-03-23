@@ -1,4 +1,19 @@
 const Favourite = require("../models/favourite");
+const getFavourite = async (req, res) => {
+  try {
+    const favourite = await Favourite.find({}).populate("user post");
+    res.status(200).json({
+      status: "Success",
+      messages: "Get favourite successfully!",
+      data: { favourite },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Fail",
+      messages: err.message,
+    });
+  }
+};
 
 const getFavouriteByUserId = async (req, res) => {
   try {
@@ -20,19 +35,21 @@ const getFavouriteByUserId = async (req, res) => {
 
 const getFavouriteByPost = async (req, res) => {
   try {
-    const favourite = await Favourite.find({ post: req.params.id }).populate("user post");
+    const favourite = await Favourite.find({ post: req.params.id }).populate(
+      "user post"
+    );
     res.status(200).json({
       status: "Success",
       messages: "Get favourite by postId successfully!",
       data: { favourite },
     });
   } catch (err) {
-    res.status(500).json({  
+    res.status(500).json({
       status: "Fail",
       messages: err.message,
     });
   }
-}
+};
 
 const createFavouritePosting = async (req, res) => {
   try {
@@ -40,7 +57,10 @@ const createFavouritePosting = async (req, res) => {
     const post = req.body.postId;
 
     // Kiểm tra xem đã tồn tại một mục yêu thích cho bài đăng này chưa
-    const existingFavorite = await Favourite.findOne({ user: user, post: post });
+    const existingFavorite = await Favourite.findOne({
+      user: user,
+      post: post,
+    });
     if (existingFavorite) {
       return res.status(400).json({
         status: "Fail",
@@ -68,34 +88,32 @@ const createFavouritePosting = async (req, res) => {
   }
 };
 
-
 const deleteFavourite = async (req, res) => {
-    const favouriteId = req.params.id;
-    try {
-      const favorite = await Favourite.findByIdAndDelete(favouriteId);
-      if (!favorite) {
-        res.status(404).json({
-          status: "Fail",
-          messages: "Can not see post favourite",
-        });
-        return;
-      }
-      res.status(200).json({
-        status: "Success",
-        messages: "Favourite post delete successfully!",
-        data: { favorite },
-      });
-    } catch (err) {
-      res.status(500).json({
+  const favouriteId = req.params.id;
+  try {
+    const favorite = await Favourite.findByIdAndDelete(favouriteId);
+    if (!favorite) {
+      res.status(404).json({
         status: "Fail",
-        messages: err.message,
+        messages: "Can not see post favourite",
       });
+      return;
     }
-  };
-
-
+    res.status(200).json({
+      status: "Success",
+      messages: "Favourite post delete successfully!",
+      data: { favorite },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Fail",
+      messages: err.message,
+    });
+  }
+};
 
 module.exports = {
+  getFavourite,
   getFavouriteByUserId,
   createFavouritePosting,
   deleteFavourite,

@@ -20,19 +20,21 @@ const sendNotification = async () => {
     time_to_live: 3600,
   };
 
-  await axios
-    .post("https://fcm.googleapis.com/fcm/send", datapayload, {
-      headers: {
-        Authorization: `key=${serverKey}`,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    const response = await axios.post(
+      "https://fcm.googleapis.com/fcm/send",
+      datapayload,
+      {
+        headers: {
+          Authorization: `key=${serverKey}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {
