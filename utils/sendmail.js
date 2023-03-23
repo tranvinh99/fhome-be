@@ -46,7 +46,7 @@ const sendEmail = async (status, post, order_url) => {
 
   const mailAdmin = {
     from: process.env.EMAIL,
-    to: "vinhthse151179@fpt.edu.vn",
+    to: "tranvinh2499@gmail.com",
     subject: "Bài đăng mới đang đợi bạn phê duyệt",
     html: `<p>Xin chào Vinh Tran,</p>
     <p>Có bài post mới đang chờ được phê duyệt</p>`,
@@ -54,7 +54,7 @@ const sendEmail = async (status, post, order_url) => {
 
   const mailRegister = {
     from: process.env.EMAIL,
-    to: "vinhthse151179@fpt.edu.vn",
+    to: "tranvinh2499@gmail.com",
     subject: "Có chủ trọ mới đang đợi bạn phê duyệt",
     html: `<p>Xin chào Vinh Tran,</p>
     <p>Người dùng có email <b> ${post.email} </b> vừa đăng kí và đang chờ được phê duyệt</p>
